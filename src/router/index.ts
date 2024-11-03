@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import MainPage from '@/pages/MainPage.vue'
-import CartPage from '@/pages/CartPage.vue'
 import FavoritePage from '@/pages/FavoritePage.vue'
 
 const router = createRouter({
@@ -10,11 +9,6 @@ const router = createRouter({
       path: '/',
       component: MainPage,
       name: 'main',
-    },
-    {
-      path: '/cart',
-      component: CartPage,
-      name: 'cart',
     },
     {
       path: '/favorite',
