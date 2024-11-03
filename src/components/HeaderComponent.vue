@@ -11,7 +11,7 @@
     <ul class="flex items-center gap-12">
       <li
         class="flex items-center gap-1 cursor-pointer hover:text-gray-500 active:text-gray-400"
-        @click="$router.push('/cart')"
+        @click="drawer.toggle"
       >
         <img class="w-8" src="/cart.svg" alt="Cart" />
         <b>1000 р.</b>
@@ -27,6 +27,10 @@
   </header>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useDrawer } from '@/stores/useDrawer'
+
+const drawer = useDrawer()
+</script>
 
 <style scoped></style>
