@@ -10,8 +10,8 @@
       :image="item.image"
       :title="item.title"
       :price="item.price"
-      :is-favorite="false"
-      :is-added="false"
+      :is-favorite="item.isFavorite"
+      :is-added="item.isAdded"
     ></card-component>
   </div>
 </template>
