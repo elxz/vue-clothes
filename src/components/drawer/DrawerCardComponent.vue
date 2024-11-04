@@ -7,18 +7,31 @@
         alt="Cross 2"
         @click="deleteItem"
       />
-      <img class="rounded-xl" src="/clothes/shirt-1.webp" alt="Clothes" />
+      <img class="rounded-xl" :src="image" alt="Clothes" />
     </div>
     <div class="flex flex-col mt-2">
-      <p>Футболка 1</p>
-      <b>1000 р.</b>
+      <p>{{ title }}</p>
+      <b>{{ price }} р.</b>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-const deleteItem = () => {
-  alert('Deleted!')
+import { useOrderClothes } from '@/stores/useOrderClothes'
+import axios from 'axios'
+
+const props = defineProps<{
+  id: number
+  image: string
+  title: string
+  price: number
+}>()
+
+const deleteItem = async (): Promise<void> => {
+  await axios
+    .delete(`https://a6c8749b80884675.mokky.dev/orders/${props.id}`)
+    .then(() => useOrderClothes().fetching())
+    .catch(err => alert(err))
 }
 </script>
 

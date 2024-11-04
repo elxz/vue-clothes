@@ -23,14 +23,20 @@
         class="w-2/12 absolute right-0 hover:opacity-50"
         :src="isAdded ? 'checked-plus.svg' : 'plus.svg'"
         alt="Plus"
-        @click="toggleProduct"
+        @click="toggleOrder"
       />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import axios from 'axios'
+
+import { useFavoriteClothes } from '@/stores/useFavoriteClothes'
+import { useOrderClothes } from '@/stores/useOrderClothes'
+
 const props = defineProps<{
+  id: number
   image: string
   title: string
   price: number
@@ -38,12 +44,28 @@ const props = defineProps<{
   isAdded: boolean
 }>()
 
-const toggleProduct = () => {
-  alert('Added!' + ' ' + props.title)
+const toggleOrder = async (): Promise<void> => {
+  await axios
+    .post('https://a6c8749b80884675.mokky.dev/orders', {
+      clothesId: props.id,
+      image: props.image,
+      title: props.title,
+      price: props.price,
+    })
+    .then(() => useOrderClothes().fetching())
+    .catch(err => alert(err))
 }
 
-const toggleFavorite = () => {
-  alert('Favorite!' + ' ' + props.title)
+const toggleFavorite = async (): Promise<void> => {
+  await axios
+    .post('https://a6c8749b80884675.mokky.dev/favorites', {
+      clothesId: props.id,
+      image: props.image,
+      title: props.title,
+      price: props.price,
+    })
+    .then(() => useFavoriteClothes().fetching())
+    .catch(err => alert(err))
 }
 </script>
 
