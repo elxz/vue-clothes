@@ -14,7 +14,7 @@
         @click="drawer.toggle"
       >
         <img class="w-8" src="/cart.svg" alt="Cart" />
-        <b>1000 р.</b>
+        <b>{{ orderClothes.totalPrice }} р.</b>
       </li>
       <li
         class="flex items-center gap-1 cursor-pointer hover:text-gray-500 active:text-gray-400"
@@ -29,8 +29,11 @@
 
 <script setup lang="ts">
 import { useDrawer } from '@/stores/useDrawer'
+import { useOrderClothes } from '@/stores/useOrderClothes'
 
 const drawer = useDrawer()
+
+const orderClothes = useOrderClothes()
 </script>
 
 <style scoped></style>

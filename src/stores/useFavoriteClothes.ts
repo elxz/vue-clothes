@@ -19,5 +19,5 @@ export const useFavoriteClothes = defineStore('favorites', () => {
 
   onMounted(fetching)
 
-  return { items }
+  return { items, fetching }
 })

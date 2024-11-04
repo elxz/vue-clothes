@@ -23,13 +23,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-
 import { useClothes } from '@/stores/useClothes'
 
 const clothes = useClothes()
 
-const options = ref<{ value: string; name: string }[]>([
+const options = <{ value: string; name: string }[]>[
   {
     value: 'name-asc',
     name: 'По названию (ASC)',
@@ -46,7 +44,7 @@ const options = ref<{ value: string; name: string }[]>([
     value: 'price-desc',
     name: 'По цене (DESC)',
   },
-])
+]
 
 const changeSort = (event: Event): void => {
   let sort = (event.target as HTMLSelectElement).value
