@@ -3,4 +3,6 @@ export default interface IClothes {
   title: string
   price: number
   image: string
+  isFavorite: boolean
+  isAdded: boolean
 }
