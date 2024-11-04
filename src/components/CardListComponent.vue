@@ -6,18 +6,20 @@
     <card-component
       v-for="item in clothes"
       :key="item.id"
+      :id="item.id"
       :image="item.image"
       :title="item.title"
       :price="item.price"
-      :is-favorite="true"
-      :is-added="true"
+      :is-favorite="false"
+      :is-added="false"
     ></card-component>
   </div>
 </template>
 
 <script setup lang="ts">
-import type IClothes from '@/interfaces/IClothes'
 import CardComponent from './CardComponent.vue'
+
+import type IClothes from '@/interfaces/IClothes'
 
 defineProps<{
   clothes: IClothes[]
