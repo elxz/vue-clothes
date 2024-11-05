@@ -21,7 +21,7 @@
 
       <img
         class="w-2/12 absolute right-0 hover:opacity-50"
-        :src="isAdded ? 'checked-plus.svg' : 'plus.svg'"
+        :src="isOrder ? 'checked-plus.svg' : 'plus.svg'"
         alt="Plus"
         @click="toggleOrder"
       />
@@ -41,31 +41,57 @@ const props = defineProps<{
   title: string
   price: number
   isFavorite: boolean
-  isAdded: boolean
+  isOrder: boolean
 }>()
 
 const toggleOrder = async (): Promise<void> => {
-  await axios
-    .post('https://a6c8749b80884675.mokky.dev/orders', {
-      clothesId: props.id,
-      image: props.image,
-      title: props.title,
-      price: props.price,
-    })
-    .then(() => useOrderClothes().fetching())
-    .catch(err => alert(err))
+  if (props.isOrder) {
+    const id = useOrderClothes().items.find(
+      item => item.clothesId === props.id,
+    )?.id
+
+    await axios
+      .delete(`https://a6c8749b80884675.mokky.dev/orders/${id}`)
+      .then(() => {
+        useOrderClothes().fetching()
+      })
+      .catch(err => alert(err))
+  } else {
+    await axios
+      .post('https://a6c8749b80884675.mokky.dev/orders', {
+        clothesId: props.id,
+        image: props.image,
+        title: props.title,
+        price: props.price,
+      })
+      .then(() => useOrderClothes().fetching())
+      .catch(err => alert(err))
+  }
 }
 
 const toggleFavorite = async (): Promise<void> => {
-  await axios
-    .post('https://a6c8749b80884675.mokky.dev/favorites', {
-      clothesId: props.id,
-      image: props.image,
-      title: props.title,
-      price: props.price,
-    })
-    .then(() => useFavoriteClothes().fetching())
-    .catch(err => alert(err))
+  if (props.isFavorite) {
+    const id = useFavoriteClothes().items.find(
+      item => item.clothesId === props.id,
+    )?.id
+
+    await axios
+      .delete(`https://a6c8749b80884675.mokky.dev/favorites/${id}`)
+      .then(() => {
+        useFavoriteClothes().fetching()
+      })
+      .catch(err => alert(err))
+  } else {
+    await axios
+      .post('https://a6c8749b80884675.mokky.dev/favorites', {
+        clothesId: props.id,
+        image: props.image,
+        title: props.title,
+        price: props.price,
+      })
+      .then(() => useFavoriteClothes().fetching())
+      .catch(err => alert(err))
+  }
 }
 </script>
 

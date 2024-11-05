@@ -4,5 +4,5 @@ export default interface IClothes {
   price: number
   image: string
   isFavorite: boolean
-  isAdded: boolean
+  isOrder: boolean
 }

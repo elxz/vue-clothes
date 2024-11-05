@@ -17,8 +17,9 @@
 </template>
 
 <script setup lang="ts">
-import { useOrderClothes } from '@/stores/useOrderClothes'
 import axios from 'axios'
+
+import { useOrderClothes } from '@/stores/useOrderClothes'
 
 const props = defineProps<{
   id: number
@@ -28,8 +29,11 @@ const props = defineProps<{
 }>()
 
 const deleteItem = async (): Promise<void> => {
+  const id = useOrderClothes().items.find(
+    item => item.clothesId === props.id,
+  )?.id
   await axios
-    .delete(`https://a6c8749b80884675.mokky.dev/orders/${props.id}`)
+    .delete(`https://a6c8749b80884675.mokky.dev/orders/${id}`)
     .then(() => useOrderClothes().fetching())
     .catch(err => alert(err))
 }

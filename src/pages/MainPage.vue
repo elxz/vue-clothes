@@ -14,8 +14,8 @@
 <script setup lang="ts">
 import { useClothes } from '@/stores/useClothes'
 
-import CardListComponent from '@/components/CardListComponent.vue'
 import MainLayout from './Layouts/MainLayout.vue'
+import CardListComponent from '@/components/CardListComponent.vue'
 import FilterSortComponent from '@/components/FilterSortComponent.vue'
 
 const clothes = useClothes()

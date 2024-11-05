@@ -11,7 +11,7 @@
       :title="item.title"
       :price="item.price"
       :is-favorite="item.isFavorite"
-      :is-added="item.isAdded"
+      :is-order="item.isOrder"
     ></card-component>
   </div>
 </template>

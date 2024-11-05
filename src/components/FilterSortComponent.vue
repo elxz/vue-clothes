@@ -29,38 +29,25 @@ const clothes = useClothes()
 
 const options = <{ value: string; name: string }[]>[
   {
-    value: 'name-asc',
+    value: 'sortedByTitleAsc',
     name: 'По названию (ASC)',
   },
   {
-    value: 'name-desc',
+    value: 'sortedByTitleDesc',
     name: 'По названию (DESC)',
   },
   {
-    value: 'price-asc',
+    value: 'sortedByPriceAsc',
     name: 'По цене (ASC)',
   },
   {
-    value: 'price-desc',
+    value: 'sortedByPriceDesc ',
     name: 'По цене (DESC)',
   },
 ]
 
 const changeSort = (event: Event): void => {
-  let sort = (event.target as HTMLSelectElement).value
-
-  if (sort === 'name-asc') {
-    clothes.sortedByNameAsc()
-  }
-  if (sort === 'name-desc') {
-    clothes.sortedByNameDesc()
-  }
-  if (sort === 'price-asc') {
-    clothes.sortedByPriceAsc()
-  }
-  if (sort === 'price-desc') {
-    clothes.sortedByPriceDesc()
-  }
+  clothes.sortedBy((event.target as HTMLSelectElement).value)
 }
 </script>
 
